@@ -28,11 +28,39 @@ import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 
 data class RequestModel constructor(
-    @field:Attribute(name = "xmlns")
-    @param:Attribute(name = "xmlns")
-    var cityNameAttribute: String? = null,
+    @field:Element(name = "StrTable", required = false)
+    @param:Element(name = "StrTable", required = false)
+    var strTable: String? = null,
 
-    @field:Element(name = "theCityName", required = false)
-    @param:Element(name = "theCityName", required = false)
-    var theCityName: String? = null
+    @field:Element(name = "StrReturnType", required = false)
+    @param:Element(name = "StrReturnType", required = false)
+    var strReturnType: String? = null,
+
+    @field:Element(name = "intREturnedRow", required = false)
+    @param:Element(name = "intREturnedRow", required = false)
+    var intREturnedRow: Integer? = null,
+
+    @field:Element(name = "strDeviceGUID", required = false)
+    @param:Element(name = "strDeviceGUID", required = false)
+    var strDeviceGUID: String? = null,
+
+    @field:Element(name = "blnCompression", required = false)
+    @param:Element(name = "blnCompression", required = false)
+    var blnCompression: Boolean? = null,
+
+    @field:Element(name = "CompressedBuffer", required = false)
+    @param:Element(name = "CompressedBuffer", required = false)
+    var compressedBuffer: String? = null,
+
+    @field:Element(name = "blnTesting", required = false)
+    @param:Element(name = "blnTesting", required = false)
+    var blnTesting: Boolean? = null,
+
+    @field:Element(name = "markSynced_table", required = false)
+    @param:Element(name = "markSynced_table", required = false)
+    var markSyncedTable: String? = null,
+
+    @field:Element(name = "markSynced_Keyvalue", required = false)
+    @param:Element(name = "markSynced_Keyvalue", required = false)
+    var markSyncedKeyvalue: String? = null
 )
