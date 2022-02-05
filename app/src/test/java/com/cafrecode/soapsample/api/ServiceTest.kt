@@ -102,6 +102,9 @@ internal class ServiceTest {
         val body = RequestBody()
         val model = RequestModel()
 
+        model.cityNameAttribute = "http://WebXml.com.cn/"
+        model.theCityName = "Nakuru"
+
         body.getWeatherbyCityName = model
         envelop.body = body
 

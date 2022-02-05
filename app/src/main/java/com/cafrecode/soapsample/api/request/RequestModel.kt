@@ -27,11 +27,12 @@ package com.cafrecode.soapsample.api.request
 import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 
-class RequestModel {
+data class RequestModel constructor(
+    @field:Attribute(name = "xmlns")
+    @param:Attribute(name = "xmlns")
+    var cityNameAttribute: String? = null,
 
-    @Attribute(name = "xmlns")
-    var cityNameAttribute: String? = null
-
-    @Element(name = "theCityName", required = false)
+    @field:Element(name = "theCityName", required = false)
+    @param:Element(name = "theCityName", required = false)
     var theCityName: String? = null
-}
+)
