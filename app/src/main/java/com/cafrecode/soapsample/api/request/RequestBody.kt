@@ -28,8 +28,8 @@ import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
 @Root(name = "soapenv:Body", strict = false)
-class RequestBody {
-
-    @Element(name = "getWeatherbyCityName", required = false)
+data class RequestBody constructor(
+    @field:Element(name = "getWeatherbyCityName", required = false)
+    @param:Element(name = "getWeatherbyCityName", required = false)
     var getWeatherbyCityName: RequestModel? = null
-}
+)

@@ -24,8 +24,8 @@
 
 package com.cafrecode.soapsample.di
 
-import android.app.Application
 import com.cafrecode.soapsample.api.HeaderInterceptor
+import com.cafrecode.soapsample.api.LiveDataCallAdapterFactory
 import com.cafrecode.soapsample.api.Service
 import dagger.Module
 import dagger.Provides
@@ -33,7 +33,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.simpleframework.xml.Serializer
+import org.simpleframework.xml.convert.AnnotationStrategy
+import org.simpleframework.xml.core.Persister
+import org.simpleframework.xml.strategy.Strategy
 import retrofit2.Retrofit
+import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -54,8 +59,14 @@ class AppModule {
             .connectTimeout(60, TimeUnit.SECONDS)
             .build()
 
+        val strategy: Strategy = AnnotationStrategy()
+
+        val serializer: Serializer = Persister(strategy)
+
         return Retrofit.Builder()
             .baseUrl(PRODUCTION)
+            .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .client(client)
             .build()
             .create(Service::class.java)

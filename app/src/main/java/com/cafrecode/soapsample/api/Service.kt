@@ -27,6 +27,7 @@ package com.cafrecode.soapsample.api
 import androidx.lifecycle.LiveData
 import com.cafrecode.soapsample.api.request.RequestEnvelope
 import com.cafrecode.soapsample.api.response.Envelope
+import com.cafrecode.soapsample.api.response.core.ApiResponse
 import retrofit2.http.Body
 import retrofit2.http.Headers
 
@@ -36,5 +37,5 @@ interface Service {
 
     @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://WebXml.com.cn/getWeatherbyCityName"])
     @POST("WeatherWebService.asmx")
-    fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): LiveData<Envelope?>?
+    fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): LiveData<ApiResponse<Envelope>>
 }

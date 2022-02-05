@@ -38,8 +38,8 @@ import org.simpleframework.xml.Root
         Namespace(reference = "http://schemas.xmlsoap.org/soap/envelope/", prefix = "soapenv")
     ]
 )
-class RequestEnvelope {
-
-    @Element(name = "soapenv:Body", required = false)
+data class RequestEnvelope constructor(
+    @field:Element(name = "Body", required = false)
+    @param:Element(name = "Body", required = false)
     var body: RequestBody? = null
-}
+)
