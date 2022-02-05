@@ -22,19 +22,12 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.api
+package com.cafrecode.soapsample.api.repository
 
-import androidx.lifecycle.LiveData
-import com.cafrecode.soapsample.api.request.RequestEnvelope
-import com.cafrecode.soapsample.api.response.Envelope
-import retrofit2.http.Body
-import retrofit2.http.Headers
+import com.cafrecode.soapsample.api.Service
+import javax.inject.Inject
 
-import retrofit2.http.POST
+class SoapRepo @Inject constructor(service: Service) {
 
-interface Service {
-
-    @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://WebXml.com.cn/getWeatherbyCityName"])
-    @POST("WeatherWebService.asmx")
-    fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): LiveData<Envelope?>?
+    // Do SOAP things with service here
 }

@@ -22,19 +22,24 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.api
+package com.cafrecode.soapsample.api.response
 
-import androidx.lifecycle.LiveData
-import com.cafrecode.soapsample.api.request.RequestEnvelope
-import com.cafrecode.soapsample.api.response.Envelope
-import retrofit2.http.Body
-import retrofit2.http.Headers
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Namespace
+import org.simpleframework.xml.NamespaceList
+import org.simpleframework.xml.Root
 
-import retrofit2.http.POST
+@Root(name = "soapenv:Envelope")
+@NamespaceList(
+    *[
+        Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi"),
+        Namespace(reference = "http://www.w3.org/2001/XMLSchema", prefix = "xsd"),
+        Namespace(reference = "http://schemas.xmlsoap.org/soap/encoding/", prefix = "enc"),
+        Namespace(reference = "http://schemas.xmlsoap.org/soap/envelope/", prefix = "soapenv")
+    ]
+)
+class Envelope {
 
-interface Service {
-
-    @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://WebXml.com.cn/getWeatherbyCityName"])
-    @POST("WeatherWebService.asmx")
-    fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): LiveData<Envelope?>?
+    @Element(name = "Body")
+    var body: Body? = null
 }

@@ -22,14 +22,22 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample
+package com.cafrecode.soapsample.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.cafrecode.soapsample.R
+import com.cafrecode.soapsample.ui.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.main_activity)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container, MainFragment.newInstance())
+                .commitNow()
+        }
     }
 }

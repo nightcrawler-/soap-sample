@@ -79,6 +79,9 @@ dependencies {
 
     // Work around for some Android 11 and Firebase failures:: java.lang.AssertionError: Method getAlpnSelectedProtocol not supported for object SSL socket over Socket
     implementation "io.grpc:grpc-okhttp:1.32.2"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 
     kapt 'com.github.bumptech.glide:compiler:4.12.0'
 

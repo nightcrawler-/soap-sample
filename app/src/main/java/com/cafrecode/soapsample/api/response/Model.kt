@@ -22,19 +22,17 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.api
+package com.cafrecode.soapsample.api.response
 
-import androidx.lifecycle.LiveData
-import com.cafrecode.soapsample.api.request.RequestEnvelope
-import com.cafrecode.soapsample.api.response.Envelope
-import retrofit2.http.Body
-import retrofit2.http.Headers
+import org.simpleframework.xml.ElementList
+import org.simpleframework.xml.Namespace
+import org.simpleframework.xml.Root
 
-import retrofit2.http.POST
+@Root(name = "getWeatherbyCityNameResponse")
+@Namespace(reference = "http://WebXml.com.cn/")
+class Model {
 
-interface Service {
-
-    @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://WebXml.com.cn/getWeatherbyCityName"])
-    @POST("WeatherWebService.asmx")
-    fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): LiveData<Envelope?>?
+    @ElementList(name = "getWeatherbyCityNameResult")
+    lateinit var result: List<String?>
 }
+//TODO: Consider making this a data clas
