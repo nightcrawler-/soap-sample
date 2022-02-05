@@ -108,13 +108,15 @@ internal class ServiceTest {
         body.getWeatherbyCityName = model
         envelop.body = body
 
-        val resp = getResponse(service.getWeatherbyCityName(requestEnvelope = envelop))
+        val resp = getResponse(service.getResponse(requestEnvelope = envelop))
         val request = mockWebServer.takeRequest()
 
-        assertThat(request.path, `is`("/getMaritalStatus"))
-        assertThat(request.method, `is`("GET"))
+        assertThat(request.path, `is`("/CassavaWebService.asmx"))
+        assertThat(request.method, `is`("POST"))
+        // TODO:: Assertions for all request concerns
+        // Assertions for all request concerns
         assertThat(resp, `is`(notNullValue()))
-        assertThat(resp.body?.getWeatherbyCityNameResponse?.result!!.size, `is`(2))
+        // assertThat(resp.body?.getRowsResponse?.result!![0], `is`("string"))
         //assertThat(resp.data!![0].title, `is`("Single"))
     }
 

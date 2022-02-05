@@ -29,7 +29,7 @@ import org.simpleframework.xml.Root
 
 @Root(name = "Body")
 data class Body constructor(
-    @field:Element(name = "getWeatherbyCityNameResponse", required = false)
-    @param:Element(name = "getWeatherbyCityNameResponse", required = false)
-    var getWeatherbyCityNameResponse: Model? = null
+    @field:Element(name = "getRowsResponse", required = false)
+    @param:Element(name = "getRowsResponse", required = false)
+    var getRowsResponse: Model? = null
 )
