@@ -30,9 +30,8 @@ import org.simpleframework.xml.Root
 
 @Root(name = "getWeatherbyCityNameResponse")
 @Namespace(reference = "http://WebXml.com.cn/")
-class Model {
-
-    @ElementList(name = "getWeatherbyCityNameResult")
-    lateinit var result: List<String?>
-}
-//TODO: Consider making this a data clas
+data class Model constructor(
+    @field:ElementList(name = "getWeatherbyCityNameResult")
+    @param:ElementList(name = "getWeatherbyCityNameResult")
+    var result: List<String?>
+)
