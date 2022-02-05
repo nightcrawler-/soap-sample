@@ -1,6 +1,6 @@
 # soap-sample
 
-This sample implements SOAP 1.1. Currently, tests can be ran with mocked data and services, to do so, run the below command (assuming all prerequisites note mentioned here have been met).
+This sample implements SOAP 1.1. Currently, tests can be ran with mocked data and services, to do so, run the below command (assuming all prerequisites not mentioned here have been met).
 
 ```
 ./gradlew test
