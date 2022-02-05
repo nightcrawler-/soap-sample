@@ -28,10 +28,14 @@ import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Namespace
 import org.simpleframework.xml.Root
 
-@Root(name = "getWeatherbyCityNameResponse")
-@Namespace(reference = "http://WebXml.com.cn/")
+@Root(name = "getRowsResult")
+@Namespace(reference = "http://cassavaWebservice.com/")
 data class Model constructor(
-    @field:ElementList(name = "getWeatherbyCityNameResult")
-    @param:ElementList(name = "getWeatherbyCityNameResult")
-    var result: List<String?>
+    @field:ElementList(name = "getRowsResult")
+    @param:ElementList(name = "getRowsResult")
+    var result: List<String>?,
+
+    @field:ElementList(name = "CompressedBuffer")
+    @param:ElementList(name = "CompressedBuffer")
+    var compressedBuffer: List<String>?
 )

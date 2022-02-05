@@ -33,29 +33,30 @@ import com.cafrecode.soapsample.api.response.Envelope
 import com.cafrecode.soapsample.api.response.core.ApiResponse
 import com.cafrecode.soapsample.util.LiveDataTestUtil.getValue
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import okio.BufferedSource
 import okio.buffer
 import okio.source
+import org.hamcrest.CoreMatchers.`is`
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.MatcherAssert.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import retrofit2.Retrofit
-import java.io.IOException
-import java.io.InputStream
-import java.nio.charset.StandardCharsets
-import java.util.Collections
-import org.hamcrest.CoreMatchers.`is`
-import org.hamcrest.CoreMatchers.notNullValue
-import org.hamcrest.MatcherAssert.assertThat
 import org.simpleframework.xml.Serializer
 import org.simpleframework.xml.convert.AnnotationStrategy
 import org.simpleframework.xml.core.Persister
 import org.simpleframework.xml.strategy.Strategy
+import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
+import java.io.IOException
+import java.io.InputStream
 import java.lang.reflect.Field
+import java.nio.charset.StandardCharsets
+import java.util.Collections
 
 internal class ServiceTest {
 
@@ -67,8 +68,12 @@ internal class ServiceTest {
 
     @Before
     fun setUp() {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
+
         val client = OkHttpClient.Builder()
             .addInterceptor(HeaderInterceptor())
+            .addInterceptor(loggingInterceptor)
             .build()
 
         val strategy: Strategy = AnnotationStrategy()
@@ -98,23 +103,25 @@ internal class ServiceTest {
     fun getResponse() {
         enqueueResponse("response.xml")
 
-        val envelop = RequestEnvelope();
+        val envelop = RequestEnvelope()
         val body = RequestBody()
         val model = RequestModel()
 
-        model.cityNameAttribute = "http://WebXml.com.cn/"
-        model.theCityName = "Nakuru"
+        model.strTable = "Nakuru"
 
-        body.getWeatherbyCityName = model
+        body.getRows = model
         envelop.body = body
 
-        val resp = getResponse(service.getWeatherbyCityName(requestEnvelope = envelop))
+        val resp = getResponse(service.getResponse(requestEnvelope = envelop))
         val request = mockWebServer.takeRequest()
 
-        assertThat(request.path, `is`("/getMaritalStatus"))
-        assertThat(request.method, `is`("GET"))
+
+        assertThat(request.path, `is`("/CassavaWebService.asmx"))
+        assertThat(request.method, `is`("POST"))
+        // TODO:: Assertions for all request concerns
+        // Assertions for all request concerns
         assertThat(resp, `is`(notNullValue()))
-        assertThat(resp.body?.getWeatherbyCityNameResponse?.result!!.size, `is`(2))
+        // assertThat(resp.body?.getRowsResponse?.result!![0], `is`("string"))
         //assertThat(resp.data!![0].title, `is`("Single"))
     }
 

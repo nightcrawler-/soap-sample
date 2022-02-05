@@ -35,7 +35,7 @@ import retrofit2.http.POST
 
 interface Service {
 
-    @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://WebXml.com.cn/getWeatherbyCityName"])
-    @POST("WeatherWebService.asmx")
-    fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): LiveData<ApiResponse<Envelope>>
+    @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://cassavaWebservice.com/getRows"])
+    @POST("CassavaWebService.asmx")
+    fun getResponse(@Body requestEnvelope: RequestEnvelope?): LiveData<ApiResponse<Envelope>>
 }
