@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample
+package com.cafrecode.soapsample.api.request
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import org.simpleframework.xml.Attribute
+import org.simpleframework.xml.Element
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+class RequestModel {
+
+    @Attribute(name = "xmlns")
+    var cityNameAttribute: String? = null
+
+    @Element(name = "theCityName", required = false)
+    var theCityName: String? = null
 }

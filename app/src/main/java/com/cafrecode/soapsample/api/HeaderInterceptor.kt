@@ -22,14 +22,27 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample
+package com.cafrecode.soapsample.api
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import okhttp3.Interceptor
+import okhttp3.Response
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class HeaderInterceptor  : Interceptor {
+
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val token = getToken()
+        val request =
+            chain.request().newBuilder().addHeader("Authorization", "Bearer $token").build()
+        return chain.proceed(request)
+    }
+
+    private fun getToken(): String {
+        // get local token
+        // what happen when auth fails/token expires? problem for the next couple of hours -- refresh(send back to login?)
+        return "" // TODO: How to refresh the token?
+    }
+
+    companion object {
+        val TAG = HeaderInterceptor.javaClass.simpleName
     }
 }

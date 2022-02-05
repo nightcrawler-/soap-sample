@@ -22,14 +22,24 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample
+package com.cafrecode.soapsample.api.request
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Namespace
+import org.simpleframework.xml.NamespaceList
+import org.simpleframework.xml.Root
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+@Root(name = "soapenv:Envelope")
+@NamespaceList(
+    *[
+        Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi"),
+        Namespace(reference = "http://www.w3.org/2001/XMLSchema", prefix = "xsd"),
+        Namespace(reference = "http://schemas.xmlsoap.org/soap/encoding/", prefix = "enc"),
+        Namespace(reference = "http://schemas.xmlsoap.org/soap/envelope/", prefix = "soapenv")
+    ]
+)
+class RequestEnvelope {
+
+    @Element(name = "soapenv:Body", required = false)
+    var body: RequestBody? = null
 }

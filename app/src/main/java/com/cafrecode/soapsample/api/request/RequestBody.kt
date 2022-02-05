@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample
+package com.cafrecode.soapsample.api.request
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import org.simpleframework.xml.Element
+import org.simpleframework.xml.Root
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+@Root(name = "soapenv:Body", strict = false)
+class RequestBody {
+
+    @Element(name = "getWeatherbyCityName", required = false)
+    var getWeatherbyCityName: RequestModel? = null
 }

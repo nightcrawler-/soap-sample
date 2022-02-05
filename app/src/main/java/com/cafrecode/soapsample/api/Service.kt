@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample
+package com.cafrecode.soapsample.api
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import retrofit2.http.Body
+import retrofit2.http.Headers
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-    }
+import retrofit2.http.POST
+
+interface Service {
+
+    // @Headers(*["Content-Type: text/xml;charset=UTF-8", "SOAPAction: http://WebXml.com.cn/getWeatherbyCityName"])
+    // @POST("WeatherWebService.asmx")
+    // fun getWeatherbyCityName(@Body requestEnvelope: RequestEnvelope?): Call<ResponseEnvelope?>?
 }
