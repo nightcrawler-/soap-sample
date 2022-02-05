@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2022  Frederick Nyawaya
+ * Copyright (c) 2020  Frederick Nyawaya
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,17 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.ui.ui.main
+package com.cafrecode.soapsample.util
 
-import androidx.lifecycle.ViewModel
-import com.cafrecode.soapsample.repository.SoapRepo
-import javax.inject.Inject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import com.cafrecode.soapsample.api.response.core.ApiResponse
+import retrofit2.Response
 
-class MainViewModel @Inject constructor(private val repo: SoapRepo) : ViewModel() {
-    // TODO: Implement the ViewModel
+object ApiUtil {
+    fun <T : Any> successCall(data: T) = createCall(Response.success(data))
+
+    fun <T : Any> createCall(response: Response<T>) = MutableLiveData<ApiResponse<T>>().apply {
+        value = ApiResponse.create(response)
+    } as LiveData<ApiResponse<T>>
 }

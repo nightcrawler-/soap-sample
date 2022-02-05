@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.api.repository
+package com.cafrecode.soapsample.repository
 
 import com.cafrecode.soapsample.api.Service
 import javax.inject.Inject
 
-class SoapRepo @Inject constructor(service: Service) {
+class SoapRepo @Inject constructor(private val service: Service) {
 
     // Do SOAP things with service here
 }

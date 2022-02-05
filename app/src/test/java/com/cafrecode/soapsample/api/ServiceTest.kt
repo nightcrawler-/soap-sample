@@ -22,12 +22,41 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.ui.ui.main
+package com.cafrecode.soapsample.api
 
-import androidx.lifecycle.ViewModel
-import com.cafrecode.soapsample.repository.SoapRepo
-import javax.inject.Inject
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import okhttp3.OkHttpClient
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
+import org.junit.Before
+import org.junit.Rule
+import retrofit2.Retrofit
 
-class MainViewModel @Inject constructor(private val repo: SoapRepo) : ViewModel() {
-    // TODO: Implement the ViewModel
+internal class ServiceTest {
+
+    @get:Rule
+    var instantExecutorRule: InstantTaskExecutorRule = InstantTaskExecutorRule()
+
+    lateinit var service: Service
+    lateinit var mockWebServer: MockWebServer
+
+    @Before
+    fun setUp() {
+        val client = OkHttpClient.Builder()
+            .addInterceptor(HeaderInterceptor())
+            .build()
+
+        mockWebServer = MockWebServer()
+        service = Retrofit.Builder()
+            .baseUrl(mockWebServer.url("/"))
+            .addCallAdapterFactory(LiveDataCallAdapterFactory())
+            .client(client)
+            .build()
+            .create(Service::class.java)
+    }
+
+    @After
+    fun tearDown() {
+        mockWebServer.shutdown()
+    }
 }

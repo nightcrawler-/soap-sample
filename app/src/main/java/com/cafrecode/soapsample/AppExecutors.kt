@@ -22,12 +22,40 @@
  * SOFTWARE.
  */
 
-package com.cafrecode.soapsample.ui.ui.main
+package com.cafrecode.soapsample
 
-import androidx.lifecycle.ViewModel
-import com.cafrecode.soapsample.repository.SoapRepo
+import android.os.Handler
+import android.os.Looper
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class MainViewModel @Inject constructor(private val repo: SoapRepo) : ViewModel() {
-    // TODO: Implement the ViewModel
+/**
+ * Global executor pools for the whole application.
+ *
+ *
+ * Grouping tasks like this avoids the effects of task starvation (e.g. disk reads don't wait behind
+ * webservice requests).
+ */
+@Singleton
+open class AppExecutors(private val diskIO: Executor, private val networkIO: Executor, private val mainThread: Executor) {
+
+    @Inject
+    constructor() : this(
+        Executors.newSingleThreadExecutor(), Executors.newFixedThreadPool(3),
+        MainThreadExecutor())
+
+    fun diskIO(): Executor = diskIO
+
+    fun networkIO(): Executor = networkIO
+
+    fun mainThread(): Executor = mainThread
+
+    private class MainThreadExecutor : Executor {
+        private val mainThreadHandler = Handler(Looper.getMainLooper())
+        override fun execute(command: Runnable) {
+            mainThreadHandler.post(command)
+        }
+    }
 }
