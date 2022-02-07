@@ -32,8 +32,10 @@ import com.cafrecode.soapsample.api.request.RequestModel
 import com.cafrecode.soapsample.api.response.Envelope
 import com.cafrecode.soapsample.api.response.core.ApiResponse
 import com.cafrecode.soapsample.repository.SoapRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val repo: SoapRepo) : ViewModel() {
 
     fun sendRequest(): LiveData<ApiResponse<Envelope>> {

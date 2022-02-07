@@ -24,6 +24,7 @@
 
 package com.cafrecode.soapsample.api.response
 
+import org.simpleframework.xml.Element
 import org.simpleframework.xml.ElementList
 import org.simpleframework.xml.Namespace
 import org.simpleframework.xml.Root
@@ -31,11 +32,11 @@ import org.simpleframework.xml.Root
 @Root(name = "getRowsResult")
 @Namespace(reference = "http://cassavaWebservice.com/")
 data class Model constructor(
-    @field:ElementList(name = "getRowsResult")
-    @param:ElementList(name = "getRowsResult")
-    var result: List<String>?,
+    @field:Element(name = "getRowsResult")
+    @param:Element(name = "getRowsResult")
+    var result: String?,
 
-    @field:ElementList(name = "CompressedBuffer")
-    @param:ElementList(name = "CompressedBuffer")
-    var compressedBuffer: List<String>?
+    @field:Element(name = "CompressedBuffer")
+    @param:Element(name = "CompressedBuffer")
+    var compressedBuffer: String?
 )

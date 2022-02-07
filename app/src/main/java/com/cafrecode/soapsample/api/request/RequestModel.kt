@@ -28,6 +28,10 @@ import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 
 data class RequestModel constructor(
+    @field:Attribute(name = "xmlns")
+    @param:Attribute(name = "xmlns")
+    var getRowsAttribute: String = "http://cassavaWebservice.com/",
+
     @field:Element(name = "StrTable", required = false)
     @param:Element(name = "StrTable", required = false)
     var strTable: String? = null,

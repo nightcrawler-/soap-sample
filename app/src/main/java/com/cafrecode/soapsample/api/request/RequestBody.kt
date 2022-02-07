@@ -27,7 +27,7 @@ package com.cafrecode.soapsample.api.request
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
-@Root(name = "soapenv:Body", strict = false)
+@Root(name = "soap:Body", strict = false)
 data class RequestBody constructor(
     @field:Element(name = "getRows", required = false)
     @param:Element(name = "getRows", required = false)
