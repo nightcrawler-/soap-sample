@@ -25,6 +25,7 @@
 package com.cafrecode.soapsample.ui.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainFragment : Fragment() {
 
     companion object {
+        val TAG: String = MainFragment::class.java.simpleName
+
         fun newInstance() = MainFragment()
     }
 
@@ -47,5 +50,14 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(R.layout.main_fragment, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        viewModel.sendRequest().observe(viewLifecycleOwner, {
+            Log.i(TAG, "Resp: $it")
+
+        })
     }
 }
