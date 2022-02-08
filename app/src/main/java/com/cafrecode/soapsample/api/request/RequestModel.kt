@@ -28,6 +28,10 @@ import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 
 data class RequestModel constructor(
+    @field:Attribute(name = "xmlns")
+    @param:Attribute(name = "xmlns")
+    var getRowsAttribute: String = "http://cassavaWebservice.com/",
+
     @field:Element(name = "StrTable", required = false)
     @param:Element(name = "StrTable", required = false)
     var strTable: String? = null,
@@ -38,7 +42,7 @@ data class RequestModel constructor(
 
     @field:Element(name = "intREturnedRow", required = false)
     @param:Element(name = "intREturnedRow", required = false)
-    var intREturnedRow: Integer? = null,
+    var intREturnedRow: String? = null, // TODO:: Use Int
 
     @field:Element(name = "strDeviceGUID", required = false)
     @param:Element(name = "strDeviceGUID", required = false)
@@ -46,7 +50,7 @@ data class RequestModel constructor(
 
     @field:Element(name = "blnCompression", required = false)
     @param:Element(name = "blnCompression", required = false)
-    var blnCompression: Boolean? = null,
+    var blnCompression: String? = null, // TODO: Use Boolean
 
     @field:Element(name = "CompressedBuffer", required = false)
     @param:Element(name = "CompressedBuffer", required = false)
@@ -54,7 +58,7 @@ data class RequestModel constructor(
 
     @field:Element(name = "blnTesting", required = false)
     @param:Element(name = "blnTesting", required = false)
-    var blnTesting: Boolean? = null,
+    var blnTesting: String? = null, // TODO: USe Boolean
 
     @field:Element(name = "markSynced_table", required = false)
     @param:Element(name = "markSynced_table", required = false)

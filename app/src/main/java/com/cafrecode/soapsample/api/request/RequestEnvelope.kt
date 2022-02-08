@@ -29,17 +29,17 @@ import org.simpleframework.xml.Namespace
 import org.simpleframework.xml.NamespaceList
 import org.simpleframework.xml.Root
 
-@Root(name = "soapenv:Envelope")
+@Root(name = "soap:Envelope")
 @NamespaceList(
     *[
         Namespace(reference = "http://www.w3.org/2001/XMLSchema-instance", prefix = "xsi"),
         Namespace(reference = "http://www.w3.org/2001/XMLSchema", prefix = "xsd"),
         Namespace(reference = "http://schemas.xmlsoap.org/soap/encoding/", prefix = "enc"),
-        Namespace(reference = "http://schemas.xmlsoap.org/soap/envelope/", prefix = "soapenv")
+        Namespace(reference = "http://schemas.xmlsoap.org/soap/envelope/", prefix = "soap")
     ]
 )
 data class RequestEnvelope constructor(
-    @field:Element(name = "Body", required = false)
-    @param:Element(name = "Body", required = false)
+    @field:Element(name = "soap:Body", required = false)
+    @param:Element(name = "soap:Body", required = false)
     var body: RequestBody? = null
 )
