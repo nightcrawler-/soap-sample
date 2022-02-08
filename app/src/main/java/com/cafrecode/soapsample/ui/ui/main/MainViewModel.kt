@@ -24,10 +24,34 @@
 
 package com.cafrecode.soapsample.ui.ui.main
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.cafrecode.soapsample.api.request.RequestBody
+import com.cafrecode.soapsample.api.request.RequestEnvelope
+import com.cafrecode.soapsample.api.request.RequestModel
+import com.cafrecode.soapsample.api.response.Envelope
+import com.cafrecode.soapsample.api.response.core.ApiResponse
 import com.cafrecode.soapsample.repository.SoapRepo
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(private val repo: SoapRepo) : ViewModel() {
-    // TODO: Implement the ViewModel
+
+    val mutableRequestModel = MutableLiveData(
+        RequestModel()
+    )
+
+    fun sendRequest(): LiveData<ApiResponse<Envelope>> {
+
+        val envelop = RequestEnvelope()
+        val body = RequestBody()
+        val model = mutableRequestModel.value
+
+        body.getRows = model
+        envelop.body = body
+
+        return repo.sendRequest(envelop)
+    }
 }

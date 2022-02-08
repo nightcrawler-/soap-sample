@@ -25,9 +25,12 @@
 package com.cafrecode.soapsample.repository
 
 import com.cafrecode.soapsample.api.Service
+import com.cafrecode.soapsample.api.request.RequestEnvelope
 import javax.inject.Inject
 
 class SoapRepo @Inject constructor(private val service: Service) {
 
     // Do SOAP things with service here
+
+    fun sendRequest(requestEnvelope: RequestEnvelope) = service.getResponse(requestEnvelope)
 }

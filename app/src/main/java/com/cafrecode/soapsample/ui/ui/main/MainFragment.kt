@@ -25,18 +25,24 @@
 package com.cafrecode.soapsample.ui.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.cafrecode.soapsample.R
+import com.cafrecode.soapsample.databinding.MainFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
 
+    lateinit var binding: MainFragmentBinding
+
     companion object {
+        val TAG: String = MainFragment::class.java.simpleName
+
         fun newInstance() = MainFragment()
     }
 
@@ -46,6 +52,24 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        binding = MainFragmentBinding.inflate(inflater)
+        binding.viewModel = viewModel
+
+        binding.next.setOnClickListener {
+            onClick()
+        }
+        return binding.root
+    }
+
+    private fun onClick() {
+        Log.i(TAG, "Request: " + viewModel.mutableRequestModel.value.toString())
+
+        Toast.makeText(requireContext(), "Sending request", Toast.LENGTH_LONG).show()
+
+        viewModel.sendRequest().observe(viewLifecycleOwner, {
+            Log.i(TAG, "Resp: $it")
+            binding.results.setText("RESULT::\n$it")
+
+        })
     }
 }

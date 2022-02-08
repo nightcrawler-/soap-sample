@@ -76,8 +76,8 @@ class AppModule {
 
         val TAG: String = AppModule::class.java.simpleName
 
-        const val PRODUCTION = "https://cinchmarkets.mwaloni.com/api/"
-        private const val STAGING = "https://cinchmarkets.mwaloni.com/cinchmarkets/api/"
+        const val PRODUCTION = "http://swissportapp.bytronics.co.ke/"
+        private const val STAGING = "http://swissportapp.bytronics.co.ke/"
         private const val SAME =
             false // Easily switch to use the same (prod) url for both, test only
 
