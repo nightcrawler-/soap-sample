@@ -60,6 +60,15 @@ def getVersionName = { ->
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('soapsample.jks')
+            keyAlias 'soapsample'
+            keyPassword 'soapsample'
+            storePassword 'soapsample'
+        }
+    }
+
     compileSdkVersion 31
 
     defaultConfig {
@@ -75,6 +84,7 @@ android {
 
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -103,6 +113,31 @@ android {
         unitTests {
             includeAndroidResources = true
             returnDefaultValues = true
+        }
+    }
+    applicationVariants.all { variant ->
+        //Only name the release variants -- might not be absolutely necessary as CI handles the publishing, but good for local manual builds
+        if (variant.buildType.name == "release") {
+
+            def apkName = "soapsample"
+            variant.outputs.each { output ->
+                def apk = output.outputFileName.replace(".apk", "")
+
+                apkName += "-" + defaultConfig.versionName
+                if (variant.buildType.name == "release") {
+                    apkName += "-release.apk"
+                } else {
+                    apkName += ".apk"
+                }
+                if (!output.zipAlign) {
+                    apkName = apkName.replace(".apk", "-unaligned.apk")
+                }
+
+                output.outputFileName = new File(apk, apkName)
+                logger.info("INFO: Set outputFile to "
+                        + output.outputFile
+                        + " for [" + output.name + "]")
+            }
         }
     }
 }
